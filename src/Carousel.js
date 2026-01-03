@@ -1,40 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Card from './Card';
 import './Carousel.css';
-import axios from 'axios';
+import { artistsData } from './data/artistsData';
 
-const CARDS = 10;
-const MAX_VISIBILITY = 3;
-
-const Carousel = () => {
+const Carousel = ({ searchTerm = '', selectedGenre = '전체' }) => {
   const [active, setActive] = useState(2);
   const [cardData, setCardData] = useState([]);
   const rightButtonRef = useRef(null);
 
   useEffect(() => {
-    const fetchArtists = async () => {
-      try {
-        const response = await axios.get('http://ec2-52-78-200-139.ap-northeast-2.compute.amazonaws.com:8080/api/files/artists');
-        const artistNames = response.data;
-        const artistData = await Promise.all(artistNames.map(async (artistName) => {
-          const imageResponse = await axios.get(`http://ec2-52-78-200-139.ap-northeast-2.compute.amazonaws.com:8080/${artistName}/images`);
-          const images = imageResponse.data;
-          return {
-            imageUrl: images.length > 0 ? images[0] : '', // 이미지가 없을 경우 빈 문자열
-            name: artistName,
-            likes: Math.floor(Math.random() * 1000),
-            hashtags: ['#Pop', '#Band', '#Funk', '#Rock', '#Alternative'],
-            profileLink: `/AMP_${artistName}`
-          };
-        }));
-        setCardData(artistData);
-      } catch (error) {
-        console.error('Error fetching artist data:', error);
-      }
-    };
+    // 더미 데이터를 필터링하고 카드 형식으로 변환
+    const filteredArtists = artistsData.filter(artist => {
+      const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesGenre = selectedGenre === '전체' || artist.genre === selectedGenre;
+      return matchesSearch && matchesGenre;
+    });
 
-    fetchArtists();
-  }, []);
+    const formattedData = filteredArtists.map((artist) => ({
+      imageUrl: artist.image,
+      name: artist.name,
+      likes: Math.floor(Math.random() * 5000) + 1000,
+      hashtags: artist.hashtags,
+      profileLink: `/amp_${artist.id}`,
+      genre: artist.genre
+    }));
+    
+    setCardData(formattedData);
+    // 필터 변경 시 active 인덱스 리셋
+    if (formattedData.length > 0) {
+      setActive(Math.min(2, Math.floor(formattedData.length / 2)));
+    }
+  }, [searchTerm, selectedGenre]);
 
   const handleLeftClick = () => {
     setActive((prevActive) => (prevActive - 1 + cardData.length) % cardData.length);
@@ -61,6 +57,15 @@ const Carousel = () => {
     };
   }, []);
 
+  if (cardData.length === 0) {
+    return (
+      <div className="carousel-empty-state">
+        <p>조건에 맞는 아티스트가 없습니다.</p>
+        <p className="carousel-empty-hint">다른 검색어나 장르를 선택해보세요.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="main-artist-card-carousel">
       <button className="main-artist-card-nav main-artist-card-left" onClick={handleLeftClick}>
@@ -71,8 +76,8 @@ const Carousel = () => {
         const direction = Math.sign(offset);
         const absOffset = Math.abs(offset) / 3;
         const pointerEvents = active === i ? 'auto' : 'none';
-        const opacity = Math.abs(offset) >= MAX_VISIBILITY ? '0' : '1';
-        const display = Math.abs(offset) > MAX_VISIBILITY ? 'none' : 'flex';
+        const opacity = Math.abs(offset) >= 3 ? '0' : '1';
+        const display = Math.abs(offset) > 3 ? 'none' : 'flex';
 
         return (
           <div
@@ -87,7 +92,7 @@ const Carousel = () => {
               display
             }}
           >
-            <Card userData={userData} /> {/* Card 컴포넌트에 userData 전달 */}
+            <Card userData={userData} />
           </div>
         );
       })}

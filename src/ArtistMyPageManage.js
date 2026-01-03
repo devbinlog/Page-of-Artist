@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './ArtistMyPage.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import Header from './Header';
+import Footer from './Footer';
 
 function App() {
   const audioRef = useRef(null);
@@ -127,24 +128,13 @@ function App() {
   };
 
   const uploadFile = async (file, artistName) => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await axios.post(`http://ec2-52-78-200-139.ap-northeast-2.compute.amazonaws.com:8080/api/files/artists/${artistName}/images`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      if (response.status === 200) {
-        console.log('File uploaded successfully');
-      } else {
-        throw new Error('File upload failed');
-      }
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    }
+    // 로컬 스토리지에 저장 (실제 백엔드 연동 시 axios 사용)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      localStorage.setItem(`artist_${artistName}_image`, reader.result);
+      console.log('File saved locally');
+    };
   };
 
   const handleSaveClick = () => {
@@ -158,18 +148,7 @@ function App() {
 
   return (
       <div className="AMP_Container">
-        <div className="AMP_header">
-          <div className="AMP_main_logo_container">
-            {/* 로고 이미지 추가 */}
-          </div>
-
-          <div className="AMP_nav">
-            <ul className="AMP_ul1">
-              <li className="AMP_li"><a href="#">|</a></li>
-              <li className="AMP_li"> <Link to="/main">MainPage</Link></li>
-            </ul>
-          </div>
-        </div>
+        <Header />
 
         <div className="AMP_card_container">
           <div className="AMP_platform_box_1">
@@ -268,25 +247,32 @@ function App() {
           {/* 커뮤니티 팝업 */}
           {showPopup && (
               <div className="AMP_community_popup">
-                <h3>Community Posts</h3>
+                <h3>커뮤니티 게시글</h3>
                 <div className="AMP_post_input">
-              <textarea
-                  placeholder="글을작성해주세요..."
-                  value={newPost}
-                  onChange={(e) => setNewPost(e.target.value)}
-              />
+                  <textarea
+                    placeholder="글을 작성해주세요..."
+                    value={newPost}
+                    onChange={(e) => setNewPost(e.target.value)}
+                  />
                   <button onClick={handlePostSubmit}>게시</button>
                 </div>
                 <ul className="AMP_post_list">
-                  {posts.map((post, index) => (
+                  {posts.length === 0 ? (
+                    <li className="AMP_post_item" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                      게시글이 없습니다. 첫 게시글을 작성해보세요!
+                    </li>
+                  ) : (
+                    posts.map((post, index) => (
                       <li key={index} className="AMP_post_item">
                         {post}
                       </li>
-                  ))}
+                    ))
+                  )}
                 </ul>
               </div>
           )}
         </div>
+        <Footer />
       </div>
   );
 }

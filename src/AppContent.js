@@ -25,14 +25,15 @@ function AppContent() {
         <div className="app-content-container"> {/* Flexbox를 적용할 부모 컴포넌트 */}
             <div className="app-content-main"> {/* 실제 콘텐츠가 들어갈 영역 */}
                 <Routes>
-                    <Route path="/" element={<Navigate to="/main" replace />} />
-                    <Route path="/main" element={<Main />} />
-                    <Route path="/main1" element={<Mainbefore />} />
+                <Route path="/" element={<Navigate to="/main" replace />} />
+                <Route path="/main" element={<Main />} />
+                <Route path="/main1" element={<Mainbefore />} />
                     <Route path="/choice" element={<GenreChoice />} />
                     
                     <Route path="/artistmypagemanage" element={<ArtistMyPageManage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/carousel" element={<CarouselSection />} />
+                    <Route path="/shortForm" element={<CarouselSection />} />
 
                     <Route path="/amp_5sos" element={<AMP5sos />} />
                     <Route path="/amp_coldplay" element={<AMPcoldplay />} />

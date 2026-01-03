@@ -1,22 +1,14 @@
-/* Login.css - 다크 테마 적용 */
-
 .Login-p {
-    text-align: center;
-    color: var(--text-secondary);
-    margin-top: 20px;
-    font-size: 15px;
-}
-
-.Login-p .toggle-link {
-    color: var(--accent-blue);
-    text-decoration: none;
-    cursor: pointer;
-    font-weight: 600;
-    margin-left: 5px;
-    transition: color 0.3s ease;
-}
-
-.Login-p .toggle-link:hover {
-    color: var(--accent-light-blue);
-    text-decoration: underline;
-}
+     text-align: center; /* 텍스트 가운데 정렬 */
+ }
+ 
+ .Login-p .toggle-link {
+     color: black; /* 링크 텍스트 색상을 검정으로 설정 */
+     text-decoration: none; /* 밑줄 제거 */
+     cursor: pointer; /* 포인터 커서 추가 */
+ }
+ 
+ .Login-p .toggle-link:hover {
+     color: black; /* 호버 시 텍스트 색상은 그대로 검정 */
+ }
+ 

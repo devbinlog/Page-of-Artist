@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './AMP_coldplay.css'; // 변경된 CSS 파일 경로
-import { useNavigate } from "react-router-dom";
+import './AMP_coldplay.css';
+import { useNavigate, Link } from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer';
+import { artistsData } from './data/artistsData';
 
 function App() {
+  const navigate = useNavigate();
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const artist = artistsData.find(a => a.id === 'coldplay');
 
   const angle = 30;
 
@@ -49,11 +54,15 @@ function App() {
         card.removeEventListener("mouseout", handleMouseOut);
       });
     };
-  }, []);
+  }, [artist]);
 
   const handleLogoClick = (url) => {
-    window.location.href = url;
+    window.open(url, '_blank');
   };
+
+  if (!artist) {
+    return <div style={{ color: 'white', textAlign: 'center', padding: '100px' }}>아티스트를 찾을 수 없습니다.</div>;
+  }
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -78,54 +87,47 @@ function App() {
   };
 
   return (
-    <div className="AMP_Container_coldplay"> {/* 변경된 클래스명 */}
-      <div className="AMP_header_coldplay"> {/* 변경된 클래스명 */}
-        <div className="AMP_main_logo_container_coldplay"> {/* 변경된 클래스명 */}
-        
+    <div className="AMP_Container_coldplay">
+      <Header />
+      <div className="AMP_card_container_coldplay">
+        <div className="AMP_platform_box_1_coldplay">
+          <div className="youtube_logo_coldplay" onClick={() => handleLogoClick(artist.platforms.youtube)} title="YouTube"></div>
+          <div className="spotify_logo_coldplay" onClick={() => handleLogoClick(artist.platforms.spotify)} title="Spotify"></div>
+          <div className="instagram_logo_coldplay" onClick={() => handleLogoClick(artist.platforms.instagram)} title="Instagram"></div>
+          <div className="soundcloud_logo_coldplay" onClick={() => handleLogoClick(artist.platforms.soundcloud)} title="SoundCloud"></div>
         </div>
 
-        <div className="AMP_nav_coldplay"> {/* 변경된 클래스명 */}
-          <ul className="AMP_ul1_coldplay"> {/* 변경된 클래스명 */}
-            <li className="AMP_li_coldplay"><a href="#">|</a></li> {/* 변경된 클래스명 */}
-            <li className="AMP_li_coldplay"><a href="#">My Page</a></li> {/* 변경된 클래스명 */}
-          </ul>
-        </div>
-      </div>
-
-      <div className="AMP_card_container_coldplay"> {/* 변경된 클래스명 */}
-        <div className="AMP_platform_box_1_coldplay"> {/* 변경된 클래스명 */}
-          <div className="youtube_logo_coldplay" onClick={() => handleLogoClick('https://www.youtube.com/@coldplay')}></div> {/* 변경된 클래스명 */}
-          <div className="spotify_logo_coldplay" onClick={() => handleLogoClick('https://open.spotify.com/artist/4gzpq5DPGxSnKTe4SA8HAU')}></div> {/* 변경된 클래스명 */}
-          <div className="instagram_logo_coldplay" onClick={() => handleLogoClick('https://www.instagram.com/coldplay/')}></div> {/* 변경된 클래스명 */}
-          <div className="soundcloud_logo_coldplay" onClick={() => handleLogoClick('https://soundcloud.com/coldplay ')}></div> {/* 변경된 클래스명 */}
-        </div>
-
-        <div className="AMP_card_coldplay AMP_border_right_behind_coldplay AMP_border_bottom_behind_coldplay"> {/* 변경된 클래스명 */}
-          <div className="AMP_shadow_coldplay"></div> {/* 변경된 클래스명 */}
-          <div className="AMP_image_coldplay AMP_background_coldplay"></div> {/* 변경된 클래스명 */}
+        <div className="AMP_card_coldplay">
+          <div className="AMP_shadow_coldplay"></div>
+          <div className="AMP_image_coldplay AMP_background_coldplay"></div>
           <div className="AMP_image_coldplay AMP_cutout_coldplay">
-            <img src="./coldplay.jpg" className="AMP_card_img_coldplay" alt="Band" /> {/* 변경된 클래스명 */}
+            <img src={artist.image} className="AMP_card_img_coldplay" alt={artist.name} />
           </div>
 
-          <div className="AMP_content_coldplay"> {/* 변경된 클래스명 */}
-            <div className="AMP_card_content_coldplay"> {/* 변경된 클래스명 */}
-              <div className="AMP_name_coldplay">coldplay</div> {/* 변경된 클래스명 */}
-              <div className="AMP_hashtag_coldplay">#Pop-Band</div> {/* 변경된 클래스명 */}
-              <div className="AMP_like_button_coldplay"> {/* 변경된 클래스명 */}
-                <div className="AMP_icon_coldplay">♥</div> {/* 변경된 클래스명 */}
-                <div className="AMP_count_coldplay"></div> {/* 변경된 클래스명 */}
+          <div className="AMP_content_coldplay">
+            <div className="AMP_card_content_coldplay">
+              <div className="AMP_name_coldplay">{artist.name}</div>
+              <div className="AMP_hashtag_coldplay">{artist.genre}</div>
+              <div className="AMP_like_button_coldplay">
+                <div className="AMP_icon_coldplay">♥</div>
+                <div className="AMP_count_coldplay">{artist.followers}</div>
               </div>
-              <div className="AMP_intro_coldplay">coldplay 밴드입니다.</div> {/* 변경된 클래스명 */}
+              <div className="AMP_hashtags_coldplay">
+                {artist.hashtags.map((tag, idx) => (
+                  <span key={idx} className="AMP_tag_coldplay">{tag}</span>
+                ))}
+              </div>
+              <div className="AMP_intro_coldplay">{artist.description}</div>
             </div>
           </div>
         </div>
 
-        <div className="AMP_player_coldplay"> {/* 변경된 클래스명 */}
+        <div className="AMP_player_coldplay">
           <audio ref={audioRef}>
-            <source src="HypeBoy.mp3" type="audio/mpeg" />
+            <source src="/HypeBoy.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
-          <div className="AMP_player_controls_coldplay"> {/* 변경된 클래스명 */}
+          <div className="AMP_player_controls_coldplay">
             <button onClick={togglePlay} className="AMP_player_button_coldplay">
               {isPlaying ? '❚❚' : '▶'}
             </button>
@@ -134,23 +136,25 @@ function App() {
         </div>
 
         <div className="AMP_community_popup_coldplay">
-          <h3>Community Posts</h3>
-            <div className="AMP_community_box_coldplay">
-              콜드플레이(영어: Coldplay)는 1996년 영국 런던 UCL에서 결성된 얼터너티브 록 밴드이다. 
-              밴드의 멤버는 그룹의 보컬이자 피아니스트, 기타리스트인 크리스 마틴, 
-              리드 기타리스트 조니 버클랜드, 베이스 가이 베리먼, 그리고 드러머와 기타 악기 연주를 맡은 윌 챔피언이다. 
-            </div>  
-
-            <div className="AMP_community_box_coldplay">
-              1997년 영국 런던에서 결성된 얼터너티브 록밴드로, 
-              오아시스의 몰락과 라디오헤드의 음악적 고립으로 침체된 브리티시 록 음악 장르의 대안으로 떠오른 록밴드이다. 
-              초기엔 트래비스와 라디오헤드가 보여준 음악과 비슷하였지만 갈수록 자신들만의 스타일을 확립시켜나가
-              평단과 대중의 호평을 동시에 받았던 몇안되는 밴드였다. 또한 2000년대 상업적으로 가장 성공한 밴드로 꼽힌다.          
-            </div>           
-                     
+          <h3>아티스트 정보</h3>
+          <div className="AMP_community_box_coldplay">
+            <p><strong>팔로워:</strong> {artist.followers}</p>
+            <p><strong>앨범 수:</strong> {artist.albums}개</p>
+          </div>
+          <div className="AMP_community_box_coldplay">
+            <p><strong>인기 곡:</strong></p>
+            <ul className="AMP_songs_list_coldplay">
+              {artist.popularSongs.map((song, idx) => (
+                <li key={idx}>{song}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="AMP_community_box_coldplay">
+            <p>{artist.description}</p>
+          </div>
         </div>
-        
       </div>
+      <Footer />
     </div>
   );
 }

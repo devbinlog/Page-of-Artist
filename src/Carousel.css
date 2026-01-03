@@ -1,95 +1,77 @@
-/* Carousel.css - 다크 테마 적용 */
+/* Carousel.css */
 
 .main-artist-card-carousel {
   position: relative;
   width: 100%;
-  min-height: 600px;
-  perspective: 1200px;
+  height: 400px;
+  perspective: 1000px;
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(165deg, var(--bg-primary), var(--bg-secondary) 88%);
-  padding: 60px 20px;
 }
 
 .main-artist-card-container {
   position: absolute;
-  width: 320px;
-  height: 420px;
-  transform: rotateY(calc(var(--offset) * 45deg)) translateZ(calc((3 - var(--offset)) * 12rem));
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, filter 0.6s ease;
+  width: 300px;
+  height: 350px;
+  transform: rotateY(calc(var(--offset) * 45deg)) translateZ(calc((3 - var(--offset)) * 10rem));
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: calc(1 - var(--abs-offset) * 0.4);
-  filter: blur(calc(var(--abs-offset) * 3px));
+  opacity: calc(1 - var(--offset) * 0.3);
+  filter: blur(calc(var(--offset) * 2px));
 }
 
 .main-artist-card-nav {
   color: var(--text-primary);
-  font-size: 2.5rem;
+  font-size: 2rem;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   top: 50%;
-  z-index: 10;
+  z-index: 2;
   cursor: pointer;
   user-select: none;
-  background: var(--bg-card);
+  background: rgba(26, 35, 64, 0.8);
   border: 2px solid var(--border-color);
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  padding: 0.8rem;
+  width: 50px;
+  height: 50px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .main-artist-card-nav:hover {
   background: var(--accent-blue);
-  border-color: var(--accent-blue);
+  border-color: var(--accent-light-blue);
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
 }
 
-.main-artist-card-nav:active {
-  transform: translateY(-50%) scale(0.95);
+.carousel-empty-state {
+  text-align: center;
+  padding: 100px 20px;
+  color: var(--text-primary);
+}
+
+.carousel-empty-state p {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.carousel-empty-hint {
+  font-size: 16px;
+  color: var(--text-secondary);
 }
 
 .main-artist-card-left {
-  left: 30px;
+  left: 10px;
   transform: translateY(-50%);
 }
 
 .main-artist-card-right {
-  right: 30px;
+  right: 10px;
   transform: translateY(-50%);
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-  .main-artist-card-carousel {
-    min-height: 500px;
-    padding: 40px 10px;
-  }
-
-  .main-artist-card-container {
-    width: 280px;
-    height: 380px;
-  }
-
-  .main-artist-card-nav {
-    width: 50px;
-    height: 50px;
-    font-size: 2rem;
-  }
-
-  .main-artist-card-left {
-    left: 10px;
-  }
-
-  .main-artist-card-right {
-    right: 10px;
-  }
 }

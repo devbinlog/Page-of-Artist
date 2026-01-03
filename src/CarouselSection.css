@@ -1,12 +1,236 @@
-/* CarouselSection.css - 다크 테마 적용 */
+/* CarouselSection.css - 다크 테마 적용 및 개선 */
 
-.main-artist-card-app {
+.carousel-page-container {
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(165deg, var(--bg-primary), var(--bg-secondary) 88%);
   display: flex;
   flex-direction: column;
+}
+
+.carousel-page-content {
+  flex: 1;
+  width: 100%;
+  padding: 60px 30px 80px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.carousel-page-header {
+  text-align: center;
+  margin-bottom: 60px;
+  width: 100%;
+}
+
+.carousel-page-title {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-light-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.carousel-page-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+/* 필터 섹션 */
+.carousel-filters {
+  display: flex;
+  gap: 20px;
   justify-content: center;
-  padding: 40px 20px;
+  align-items: center;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  padding: 12px 20px;
+  min-width: 300px;
+  transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  padding-right: 10px;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-icon {
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.genre-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  padding: 12px 20px;
+}
+
+.genre-filter label {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.genre-select {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  padding: 6px 12px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.genre-select:hover {
+  border-color: var(--accent-blue);
+}
+
+.genre-select:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
+}
+
+/* 아티스트 정보 섹션 */
+.artists-info-section {
+  width: 100%;
+  margin-top: 80px;
+}
+
+.artists-info-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.artist-info-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.artist-info-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
+}
+
+.artist-info-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.artist-info-content {
+  padding: 20px;
+}
+
+.artist-info-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.artist-info-genre {
+  font-size: 14px;
+  color: var(--accent-light-blue);
+  margin-bottom: 12px;
+}
+
+.artist-info-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.artist-info-tag {
+  padding: 4px 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .carousel-page-content {
+    padding: 40px 20px 60px;
+  }
+
+  .carousel-page-title {
+    font-size: 36px;
+  }
+
+  .carousel-page-subtitle {
+    font-size: 16px;
+  }
+
+  .carousel-filters {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-box {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .genre-filter {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .artists-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
 }
