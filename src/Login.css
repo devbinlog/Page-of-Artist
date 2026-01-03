@@ -1,0 +1,22 @@
+/* Login.css - 다크 테마 적용 */
+
+.Login-p {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.Login-p .toggle-link {
+    color: var(--accent-blue);
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.3s ease;
+}
+
+.Login-p .toggle-link:hover {
+    color: var(--accent-light-blue);
+    text-decoration: underline;
+}

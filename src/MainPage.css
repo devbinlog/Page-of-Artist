@@ -1,0 +1,279 @@
+.MainpageContainer {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(165deg, var(--bg-primary), var(--bg-secondary) 88%);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+.MP_Contents {
+    flex: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+}
+
+.MP_Box1,
+.MP_Box2 {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 0.75;
+    border-radius: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.MP_Box1::before,
+.MP_Box2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(107, 163, 240, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.MP_Box1::after,
+.MP_Box2::after {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 3px solid var(--accent-blue);
+    border-radius: 16px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+}
+
+.MP_Box1:hover,
+.MP_Box2:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(74, 144, 226, 0.3);
+    border-color: var(--accent-blue);
+}
+
+.MP_Box1:hover::before,
+.MP_Box2:hover::before {
+    opacity: 1;
+}
+
+.MP_Box1:hover::after,
+.MP_Box2:hover::after {
+    opacity: 1;
+    inset: 10px;
+}
+
+#MP_Box1Image,
+#MP_Box2Image {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#MP_Box1Image img,
+#MP_Box2Image img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: brightness(0.9);
+}
+
+#MP_Box1Image:hover img,
+#MP_Box2Image:hover img {
+    filter: grayscale(0.3) brightness(0.5);
+    transform: scale(1.05);
+}
+
+.MainContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-primary);
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    width: 90%;
+    max-width: 400px;
+    z-index: 3;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.MP_Box1:hover .MainContent,
+.MP_Box2:hover .MainContent {
+    opacity: 1;
+}
+
+.MainContent h3 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-light-blue);
+}
+
+.MainContent p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.PageMove {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(74, 144, 226, 0.2);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    border: 2px solid var(--accent-blue);
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.PageMove:hover {
+    background: var(--accent-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+}
+
+.PopupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.MP_Popup {
+    width: 90vw;
+    max-width: 1000px;
+    height: 85vh;
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1001;
+    border: 1px solid var(--border-color);
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.MP_CloseButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    z-index: 1002;
+}
+
+.MP_CloseButton:hover {
+    background: #e74c3c;
+    border-color: #e74c3c;
+    transform: scale(1.05);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .MP_Contents {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .MP_Box1,
+    .MP_Box2 {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .MP_Contents {
+        padding: 20px;
+    }
+
+    .PageMove {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 20px;
+    }
+
+    .MainContent {
+        padding: 20px;
+    }
+
+    .MainContent h3 {
+        font-size: 20px;
+    }
+
+    .MainContent p {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,12 @@
+/* CarouselSection.css - 다크 테마 적용 */
+
+.main-artist-card-app {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(165deg, var(--bg-primary), var(--bg-secondary) 88%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}

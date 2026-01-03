@@ -1,0 +1,8 @@
+@import url('https://rsms.me/inter/inter.css');
+
+@font-face {
+    font-family: 'Inter';
+    src: url('https://example.com/path/to/Inter-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

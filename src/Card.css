@@ -1,0 +1,179 @@
+/* Card.css - 다크 테마 적용 */
+
+.main-artist-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  color: var(--text-primary);
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.main-artist-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--accent-blue);
+  box-shadow: 0 15px 40px rgba(74, 144, 226, 0.3);
+}
+
+.main-artist-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.main-artist-card:hover::before {
+  opacity: 1;
+}
+
+.main-artist-card-front {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-artist-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--border-color);
+  transition: all 0.4s ease;
+}
+
+.main-artist-card:hover .main-artist-card-image {
+  border-color: var(--accent-blue);
+  transform: scale(1.05);
+}
+
+.main-artist-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main-artist-card-user-info {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.main-artist-card-heart-icon {
+  color: #e74c3c;
+  font-size: 1.2rem;
+  margin-left: 8px;
+  display: inline-block;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.main-artist-card-likes {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.main-artist-card-hashtags {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.main-artist-card-hashtag {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  color: var(--accent-light-blue);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.main-artist-card-hashtag:hover {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.main-artist-card-profile-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background: var(--accent-blue);
+  border: 2px solid var(--accent-blue);
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.main-artist-card-profile-link:hover {
+  background: var(--accent-light-blue);
+  border-color: var(--accent-light-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+}
+
+.main-artist-card-profile-link:active {
+  transform: translateY(0);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .main-artist-card {
+    padding: 1rem;
+  }
+
+  .main-artist-card-image {
+    height: 150px;
+    margin-bottom: 1rem;
+  }
+
+  .main-artist-card-user-info {
+    font-size: 1.1rem;
+  }
+
+  .main-artist-card-hashtag {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .main-artist-card-profile-link {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+}
