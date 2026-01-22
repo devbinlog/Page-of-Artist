@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Page of Artist
+아티스트가 직접 본인의 음악, 스토리, 프로필을 올리고, 팬은 인지도가 아닌 장르 기반 탐색 + 추천 시스템으로 새로운 아티스트를 발견하는 웹 플랫폼입니다.  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- 기간: 2024.03 ~ 2024.06 (Capstone, 6인팀)
+- 본인 역할: Team Lead / PM/기획 / Frontend
+- 성과: 캡스톤 성적: *A+, 교수진 우수 평가: “기획 부분에서 창의적이고 기술적으로 도전적인 성과이자 협업을 통한 문제 해결 능력이 뛰어나다”
 
-## Available Scripts
+## Demo
+- Live: [배포 링크]
+- Preview: (GIF/스크린샷 2~3장)
+  - [메인(장르선택) 이미지]
+  - [아티스트 탐색/프로필 이미지]
+  - [3D 숏폼/인터랙션 이미지]
 
-In the project directory, you can run:
+## 핵심 기능 (Top 3)
+1. 장르 선택 & 추천
+   - 사용자가 취향 장르를 선택하면 해당 취향에 맞춰 음악/아티스트 탐색 흐름을 제공
+2. 아티스트 프로필 & 음악 업로드/관리
+   - 아티스트 정보 소개, 음악 업로드 및 관리, 프로필 카드 UI
+3. 3D 오브젝트/효과(핵심 화면 적용)
+   - 장르 선택/아티스트 탐색 등 핵심 화면에서 3D 오브젝트 기반 인터랙션 제공
 
-### `npm start`
+## 사용자 여정(온보딩)
+메인 → 가입/로그인 → 탐색 → (장르 추천 OR 아티스트 선택) → 음악/아티스트 발견
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
+- Frontend: React, TypeScript
+- Backend: Node.js, MySQL
+- 3D: Three.js, React Three Fiber
+- Collaboration: GitHub, Code Review
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 내가 한 일 (Frontend)
+- 메인 페이지(장르 선택)
+- 아티스트 프로필 카드 선택/탐색 UI
+- 3D 숏폼/인터랙션 화면
+- 마이페이지
+- 로그인/회원가입 페이지
 
-### `npm test`
+## 협업 방식
+- GitHub 기반 협업
+- 코드리뷰: 약 16주 동안 총 15회 운영(정기 리뷰)
+- 회의: 주 1회
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Local Setup
+```bash
+npm install
+npm start
